@@ -1,0 +1,8 @@
+include 'ro_persistenceLayer'
+include 'ro_ejbLayer'
+include 'ro_webLayer'
+include 'ro_RESTService'
+include 'ro_remoteApplication'
+include 'ro_richClient'
+include 'ro_mqService'
+include 'ro_jmsClient'

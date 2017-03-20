@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<application xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_6.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="6">
+  <module>
+    <web>
+      <web-uri>ro_RESTService.war</web-uri>
+      <context-root>api</context-root>
+    </web>
+  </module>
+  <module>
+    <web>
+      <web-uri>ro_webLayer.war</web-uri>
+      <context-root>webpage</context-root>
+    </web>
+  </module>
+  <module>
+    <ejb>ro_persistenceLayer.jar</ejb>
+  </module>
+  <module>
+    <ejb>ro_ejbLayer.jar</ejb>
+  </module>
+  <module>
+    <ejb>ro_mqService.jar</ejb>
+  </module>
+  <library-directory>lib</library-directory>
+</application>

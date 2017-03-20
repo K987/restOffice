@@ -1,0 +1,56 @@
+apply plugin: 'java'
+apply plugin: 'javafx-gradle-plugin'
+//https://github.com/FibreFoX/javafx-gradle-plugin
+
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+
+buildscript {
+    dependencies {
+        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.7.0'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+repositories {
+flatDir { dirs 'lib' }
+}
+
+processResources {
+  from ('src/main/java') {
+    include '**/*.fxml'
+  }
+}
+
+dependencies {
+	compile project(':ro_remoteApplication')
+	compile name: 'jboss-client', ext: 'jar'
+	//compile name: 'jfxrt', ext: 'jar'
+}
+
+jfx {
+
+	mainClass = 'hun.restoffice.client.AppEntry'
+ 	appName = 'Rest Office Client'
+ 	jfxMainAppJarName = 'ro_restClient_Runnable.jar' 
+ 	copyAdditionalAppResourcesToJar = true
+ 	//bundler = 'PKG'
+ 	vendor = 'Im'
+}
+
+build {
+	//list of available bundlers
+	//finalizedBy 'jfxListBundlers'
+	
+	//creates a runnable jar (fast and small)
+	finalizedBy 'jfxJar'
+	
+	
+	//use this if you want to create a super-duper selfcontaining installer (takes time and storage)
+	//you may want to adjust the bundler parameter of jfx task
+	//finalizedBy 'jfxNative'
+}

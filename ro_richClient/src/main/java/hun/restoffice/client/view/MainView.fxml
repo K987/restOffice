@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="480" minWidth="700" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hun.restoffice.client.controller.MainController">
+   <bottom>
+      <ButtonBar minHeight="40.0" prefWidth="-1" BorderPane.alignment="CENTER">
+        <buttons>
+          <Button fx:id="cancel" mnemonicParsing="false" onAction="#onCancel" text="Mégse" />
+            <Button fx:id="previous" mnemonicParsing="false" onAction="#onPrevious" text="Előző" />
+            <Button fx:id="next" mnemonicParsing="false" onAction="#onNext" text="Következő" />
+            <Button fx:id="send" mnemonicParsing="false" onAction="#onSend" text="Küld" />
+        </buttons>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </ButtonBar>
+   </bottom>
+   <center>
+      <Pane />
+   </center>
+   <left>
+      <VBox fx:id="advanceIndicator" maxWidth="100.0" prefHeight="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" lineSpacing="1.0" minHeight="70.0" style="-fx-background-color: greenyellow;" text="Válassza ki a lezázni kívánt napot" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label lineSpacing="1.0" minHeight="70.0" style="-fx-background-color: salmon" text="Adja meg a pénzforgalmi záró számokat" textAlignment="CENTER" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label lineSpacing="1.0" minHeight="70.0" style="-fx-background-color: salmon" text="Adja meg a munkaórákat" textAlignment="CENTER" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label minHeight="70.0" style="-fx-background-color: salmon" text="Rögzítse a napi forgalmi elszámolást" textAlignment="CENTER" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label lineSpacing="1.0" minHeight="70.0" style="-fx-background-color: salmon" text="Adatok ellenőrzése" textAlignment="CENTER" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+         <BorderPane.margin>
+            <Insets left="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+</BorderPane>

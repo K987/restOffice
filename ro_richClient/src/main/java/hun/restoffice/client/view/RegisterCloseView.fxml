@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<!--BorderPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" 
+	fx:controller="hun.restoffice.client.controller.RegisterController -->
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+	<left>
+		<TableView fx:id="registerTable" editable="true" minWidth="450.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+			<columns>
+				<TableColumn fx:id="idCol" editable="false" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Azonosító" />
+				<TableColumn fx:id="typeCol" editable="false" maxWidth="-1.0" minWidth="150.0" prefWidth="-1.0" text="Típus" />
+				<TableColumn fx:id="usedCol" editable="true" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Üzemelt" />
+				<TableColumn fx:id="closeNoCol" editable="true" maxWidth="-1.0" minWidth="100.0" onEditCommit="#handleNumberChange" prefWidth="-1.0" />
+				<TableColumn fx:id="amtCol" editable="true" maxWidth="-1.0" minWidth="100.0" onEditCommit="#handleNumberChange" prefWidth="-1.0" />
+			</columns>
+		</TableView>
+	</left>
+	<center>
+		<GridPane BorderPane.alignment="CENTER">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<Label text="Készpénz:" />
+				<Label text="Bankkártya:" GridPane.rowIndex="1" />
+				<Label text="ÖSSZESEN:" underline="true" GridPane.rowIndex="2" />
+				<Label fx:id="cashLbl" text="Label" GridPane.columnIndex="1">
+					<GridPane.margin>
+						<Insets left="5.0" />
+					</GridPane.margin>
+				</Label>
+				<Label fx:id="cardLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+					<GridPane.margin>
+						<Insets left="5.0" />
+					</GridPane.margin>
+				</Label>
+				<Label fx:id="sumLabel" text="Label" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+					<GridPane.margin>
+						<Insets left="5.0" />
+					</GridPane.margin>
+				</Label>
+			</children>
+			<BorderPane.margin>
+				<Insets left="5.0" right="5.0" />
+			</BorderPane.margin>
+		</GridPane>
+	</center>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</BorderPane>

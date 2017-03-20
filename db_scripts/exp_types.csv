@@ -1,0 +1,11 @@
+exp_type_name,eyp_type_prod_related
+áru,TRUE
+bérköltség,TRUE
+beruházás,FALSE
+karbantartás,FALSE
+eszköz,TRUE
+irodaszer,FALSE
+tulajdonosi kivét,FALSE
+program,FALSE
+szolgáltatás,FALSE
+étkészlet,TRUE
