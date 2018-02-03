@@ -7,9 +7,6 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-import hun.restoffice.remoteClient.domain.DocTypeStub;
-import hun.restoffice.remoteClient.domain.PaymentMethodStub;
-
 /**
  * 
  *
@@ -17,20 +14,24 @@ import hun.restoffice.remoteClient.domain.PaymentMethodStub;
  */
 public class ExpenseStub {
 
-	private final String docId;
-	private final DocTypeStub docType;
-	private final PartnerStub issuer;
-	private final PaymentMethodStub payMethod;
-	private final BigDecimal grossTotal;
-	private final String description;
-	private final Calendar issue;
-	private final Calendar expiry;
-	private final Calendar payed;
-	private final Calendar accPeriodStart;
-	private final Calendar accPeriodEnd;
-	private final String costCenter;
-	private final String costType;
+	private String docId;
+	private DocTypeStub docType;
+	private PartnerStub issuer;
+	private PaymentMethodStub payMethod;
+	private BigDecimal grossTotal;
+	private String description;
+	private Calendar issue;
+	private Calendar expiry;
+	private Calendar payed;
+	private Calendar accPeriodStart;
+	private Calendar accPeriodEnd;
+	private String costCenter;
+	private String costType;
 
+	public ExpenseStub() {
+		
+	}
+	
 	/**
 	 * @param docId
 	 * @param docType
@@ -47,11 +48,11 @@ public class ExpenseStub {
 	 * @param costCenter
 	 * @param costType
 	 */
-	public ExpenseStub(String docId, int docType, PartnerStub name, int payMethod, BigDecimal grossTotal, String description, Date registered, Date expiry,
+	public ExpenseStub(String docId, int docType, PartnerStub partner, int payMethod, BigDecimal grossTotal, String description, Date registered, Date expiry,
 			Date payed, Date startDate, Date endDate, String costCenter, String costType) {
 		this.docId = docId;
 		this.docType = DocTypeStub.values()[docType];
-		this.issuer = name;
+		this.issuer = partner;
 		this.payMethod = PaymentMethodStub.values()[payMethod];
 		this.grossTotal = grossTotal;
 		this.description = description;
@@ -176,6 +177,6 @@ public class ExpenseStub {
 	public String toString() {
 		return String.format(
 				"ExpsnseStub [docId=%s, docType=%s, issuer=%s, payMethod=%s, grossTotal=%s, description=%s, registered=%s, expiry=%s, payed=%s, accPeriodStart=%s, accPeriodEnd=%s, costCenter=%s, costType=%s]",
-				docId, docType, issuer == null ? "" : issuer.getName(), payMethod, grossTotal, description, issue.getTimeInMillis(), expiry == null ? "" : expiry.getTimeInMillis(), payed == null ? "" : payed.getTimeInMillis(), accPeriodStart == null ? "" : accPeriodStart.getTimeInMillis(), accPeriodEnd == null ? "" : accPeriodEnd.getTimeInMillis(), costCenter, costType);
+				docId, docType, issuer == null ? "" : issuer.getName(), payMethod, grossTotal, description, issue == null ? "" : issue.getTimeInMillis(), expiry == null ? "" : expiry.getTimeInMillis(), payed == null ? "" : payed.getTimeInMillis(), accPeriodStart == null ? "" : accPeriodStart.getTimeInMillis(), accPeriodEnd == null ? "" : accPeriodEnd.getTimeInMillis(), costCenter, costType);
 	}
 }

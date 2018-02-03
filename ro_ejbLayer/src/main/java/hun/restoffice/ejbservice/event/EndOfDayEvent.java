@@ -6,7 +6,7 @@ package hun.restoffice.ejbservice.event;
 import java.io.Serializable;
 import java.util.List;
 
-import hun.restoffice.remoteClient.domain.IncomeStub;
+import hun.restoffice.ejbservice.domain.IncomeStub;
 
 /**
  * 

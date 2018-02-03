@@ -10,12 +10,12 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
+import hun.restoffice.ejbservice.domain.DocTypeStub;
+import hun.restoffice.ejbservice.domain.IncomeStub;
+import hun.restoffice.ejbservice.domain.PaymentMethodStub;
 import hun.restoffice.persistence.entity.financialTransaction.DocumentType;
 import hun.restoffice.persistence.entity.financialTransaction.Income;
 import hun.restoffice.persistence.entity.financialTransaction.PaymentMethod;
-import hun.restoffice.remoteClient.domain.DocTypeStub;
-import hun.restoffice.remoteClient.domain.IncomeStub;
-import hun.restoffice.remoteClient.domain.PaymentMethodStub;
 
 /**
  * 
@@ -46,7 +46,7 @@ public class IncomeConverter implements IncomeConverterLocal {
 	 */
 	@Override
 	public List<IncomeStub> to(List<Income> incomes) {
-		List<IncomeStub> rtrn = new ArrayList();
+		List<IncomeStub> rtrn = new ArrayList<IncomeStub>();
 		for (Income income : incomes) {
 			rtrn.add(to(income));
 		}

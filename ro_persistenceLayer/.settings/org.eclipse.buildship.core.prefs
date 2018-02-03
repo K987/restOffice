@@ -1,6 +1,6 @@
 build.commands=org.eclipse.jdt.core.javabuilder
 connection.arguments=
-connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)
+connection.gradle.distribution=GRADLE_DISTRIBUTION(LOCAL_INSTALLATION(/Volumes/MacHDD1/.sdkman/candidates/gradle/4.0))
 connection.java.home=null
 connection.jvm.arguments=
 connection.project.dir=..

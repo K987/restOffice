@@ -7,8 +7,8 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import hun.restoffice.ejbservice.domain.IncomeStub;
 import hun.restoffice.persistence.entity.financialTransaction.Income;
-import hun.restoffice.remoteClient.domain.IncomeStub;
 
 /**
  *  

@@ -8,11 +8,11 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
+import hun.restoffice.ejbservice.domain.CalendarScheduleStub;
+import hun.restoffice.ejbservice.domain.EmployeeShiftStub;
 import hun.restoffice.ejbservice.domain.ShiftStub;
 import hun.restoffice.persistence.entity.employee.EmployeeShift;
 import hun.restoffice.persistence.entity.employee.Shift;
-import hun.restoffice.remoteClient.domain.CalendarScheduleStub;
-import hun.restoffice.remoteClient.domain.EmployeeShiftStub;
 
 /**
  * Convert shift entity and stub back and forth

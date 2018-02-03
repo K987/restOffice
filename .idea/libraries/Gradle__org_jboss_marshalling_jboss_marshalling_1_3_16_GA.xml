@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jboss.marshalling:jboss-marshalling:1.3.16.GA">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jboss.marshalling/jboss-marshalling/1.3.16.GA/3fafd8fc72859b70d8cd6d1ff2197bdf2fe9c0e1/jboss-marshalling-1.3.16.GA.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jboss.marshalling/jboss-marshalling/1.3.16.GA/36976326a2def839ada20555ba603e87e44202dd/jboss-marshalling-1.3.16.GA-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

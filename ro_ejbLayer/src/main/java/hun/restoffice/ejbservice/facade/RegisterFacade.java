@@ -14,12 +14,11 @@ import javax.ejb.Stateless;
 import org.apache.log4j.Logger;
 
 import hun.restoffice.ejbservice.converter.RegisterConverterLocal;
+import hun.restoffice.ejbservice.domain.RegisterCloseStub;
+import hun.restoffice.ejbservice.exception.FacadeException;
 import hun.restoffice.persistence.entity.dailyTransaction.RegisterClose;
 import hun.restoffice.persistence.exception.PersistenceServiceException;
 import hun.restoffice.persistence.service.RegisterServiceLocal;
-import hun.restoffice.remoteClient.domain.RegisterCloseStub;
-import hun.restoffice.remoteClient.exception.FacadeException;
-import hun.restoffice.remoteClient.facade.RegisterFacadeRemote;
 
 /**
  * 
@@ -61,7 +60,7 @@ public class RegisterFacade implements RegisterFacadeRemote {
 			return rtrn;
 		} catch (PersistenceServiceException e) {
 			LOG.error(e);
-			throw new hun.restoffice.remoteClient.exception.FacadeException(e.getLocalizedMessage());
+			throw new hun.restoffice.ejbservice.exception.FacadeException(e.getLocalizedMessage());
 		}
 	}
 

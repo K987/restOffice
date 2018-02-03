@@ -7,10 +7,10 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import hun.restoffice.ejbservice.domain.RegisterCloseStub;
+import hun.restoffice.ejbservice.domain.RegisterStub;
 import hun.restoffice.persistence.entity.dailyTransaction.Register;
 import hun.restoffice.persistence.entity.dailyTransaction.RegisterClose;
-import hun.restoffice.remoteClient.domain.RegisterCloseStub;
-import hun.restoffice.remoteClient.domain.RegisterStub;
 
 /**
  *  

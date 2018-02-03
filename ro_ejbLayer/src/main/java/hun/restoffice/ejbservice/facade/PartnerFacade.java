@@ -16,10 +16,10 @@ import hun.restoffice.ejbservice.domain.PartnerContactStub;
 import hun.restoffice.ejbservice.domain.PartnerStub;
 import hun.restoffice.ejbservice.exception.AdaptorException;
 import hun.restoffice.ejbservice.exception.ApplicationError;
+import hun.restoffice.ejbservice.exception.FacadeException;
 import hun.restoffice.persistence.exception.PersistenceExceptionType;
 import hun.restoffice.persistence.exception.PersistenceServiceException;
 import hun.restoffice.persistence.service.PartnerServiceLocal;
-import hun.restoffice.remoteClient.exception.FacadeException;
 
 /**
  * Partner business facade

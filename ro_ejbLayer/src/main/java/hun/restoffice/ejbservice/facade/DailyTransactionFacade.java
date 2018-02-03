@@ -14,10 +14,9 @@ import org.apache.log4j.Logger;
 
 import hun.restoffice.ejbservice.business.DailyTransactionBusinessLocal;
 import hun.restoffice.ejbservice.converter.DailyTransactionConverterLocal;
+import hun.restoffice.ejbservice.domain.DailyTransactionStub;
+import hun.restoffice.ejbservice.exception.FacadeException;
 import hun.restoffice.persistence.service.DailyTransactionServiceLocal;
-import hun.restoffice.remoteClient.domain.DailyTransactionStub;
-import hun.restoffice.remoteClient.exception.FacadeException;
-import hun.restoffice.remoteClient.facade.DailyTransactionFacadeRemote;
 
 /**
  *  

@@ -7,7 +7,7 @@ import java.util.Calendar;
 
 import javax.ejb.Local;
 
-import hun.restoffice.remoteClient.exception.FacadeException;
+import hun.restoffice.ejbservice.exception.FacadeException;
 
 /**
  *  

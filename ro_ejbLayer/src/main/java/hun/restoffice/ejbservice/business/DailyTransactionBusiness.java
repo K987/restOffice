@@ -14,7 +14,9 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import hun.restoffice.ejbservice.converter.IncomeConverterLocal;
+import hun.restoffice.ejbservice.domain.IncomeStub;
 import hun.restoffice.ejbservice.event.EndOfDayEvent;
+import hun.restoffice.ejbservice.exception.FacadeException;
 import hun.restoffice.persistence.entity.dailyTransaction.DailyIncome;
 import hun.restoffice.persistence.entity.dailyTransaction.RegisterClose;
 import hun.restoffice.persistence.entity.dailyTransaction.RegisterType;
@@ -25,8 +27,6 @@ import hun.restoffice.persistence.exception.PersistenceServiceException;
 import hun.restoffice.persistence.service.DailyTransactionServiceLocal;
 import hun.restoffice.persistence.service.IncomeServiceLocal;
 import hun.restoffice.persistence.service.RegisterServiceLocal;
-import hun.restoffice.remoteClient.domain.IncomeStub;
-import hun.restoffice.remoteClient.exception.FacadeException;
 
 /**
  * 

@@ -1,54 +1,43 @@
-apply plugin: 'eclipse'
 apply plugin: 'ear'
-apply plugin: 'java'
+
 
 allprojects{
+
+  
 	repositories {
 		mavenCentral()
-		maven { url "http://repository.pentaho.org/artifactory/repo" }
+		//maven { url "http://repository.pentaho.org/artifactory/repo" }
 	}
-	/*
-	eclipse{
-		classpath {
-			downloadJavadoc = true
-		}
-	}
-	*/
 }
 
-
-
 subprojects{
-  apply plugin: 'eclipse'
-  apply plugin: 'java'
 
-  sourceCompatibility = 1.7
-  targetCompatibility = 1.7
-  dependencies{
-    compile group: 'javax', name: 'javaee-api', version: '6.0'
-    compile group: 'log4j', name: 'log4j', version: '1.2.17'
-    testCompile group: 'org.testng', name: 'testng', version: '6.9.+'
-  }
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+	
+	sourceCompatibility = 1.8
+ 	targetCompatibility = 1.8
+
+	dependencies{
+		compile group: 'log4j', name: 'log4j', version: '1.2.17'
+		testCompile group: 'org.testng', name: 'testng', version: '6.9.+'
+  	}
 }
 
 ear{
 	deploymentDescriptor {
-		webModule('ro_RESTService.war', 'api')
-		webModule('ro_webLayer.war', 'webpage')
+		webModule('restoffice.war', 'restoffice')
 	}
 }
 
 dependencies{
-  	deploy project ('ro_persistenceLayer')
+	deploy project ('ro_persistenceLayer')
   	deploy project ('ro_ejbLayer')
 	deploy project (path: 'ro_RESTService', configuration: 'archives')
-  	deploy project (path: 'ro_webLayer', configuration: 'archives')
-	earlib project ('ro_remoteApplication')
-	deploy project ('ro_mqService')
 }
 
 task copyTask(type: Copy){
 	from 'build/libs'
-	into '/Volumes/MacHDD1/EAP-6.4.0/standalone/deployments/'
-	//into 'c:\\EAP-6.4.0\\standalone\\deployments\\'
+	into '/Volumes/MacHDD1/EAP-7.0.0/standalone/deployments/'
+	//into 'c:\\EAP-7.0.0\\standalone\\deployments\\'
 }

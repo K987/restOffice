@@ -10,7 +10,7 @@ import javax.ejb.Local;
 import hun.restoffice.ejbservice.domain.PartnerContactStub;
 import hun.restoffice.ejbservice.domain.PartnerStub;
 import hun.restoffice.ejbservice.exception.AdaptorException;
-import hun.restoffice.remoteClient.exception.FacadeException;
+import hun.restoffice.ejbservice.exception.FacadeException;
 
 /**
  * Partner business facade

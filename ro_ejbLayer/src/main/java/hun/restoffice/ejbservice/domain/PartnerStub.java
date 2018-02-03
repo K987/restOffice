@@ -3,9 +3,9 @@
  */
 package hun.restoffice.ejbservice.domain;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
+//import org.codehaus.jackson.annotate.JsonCreator;
+//import org.codehaus.jackson.annotate.JsonIgnore;
+//import org.codehaus.jackson.annotate.JsonProperty;
 
 import hun.restoffice.persistence.entity.partner.Partner;
 
@@ -18,10 +18,14 @@ public class PartnerStub {
 
 	// private static final Logger LOG = Logger.getLogger(PartnerStub.class);
 
-	private final String name;
-	private final String account;
-	private final PartnerContactStub contact;
-	private final Integer id;
+	private String name;
+	private String account;
+	private PartnerContactStub contact;
+	private Integer id;
+	
+	public PartnerStub() {
+		
+	}
 
 	public PartnerStub(final Partner partner, final boolean account) {
 		this.id = partner.getId();
@@ -44,11 +48,11 @@ public class PartnerStub {
 		this.id = -1;
 	}
 
-	@JsonCreator
-	public PartnerStub(@JsonProperty("name") String name, @JsonProperty("account") String account, @JsonProperty("contact.name") String pName,
-			@JsonProperty("contact.phone") String pPhone, @JsonProperty("contact.email") String pEmail) {
-		this(name, account, new PartnerContactStub(pName, pPhone, pEmail));
-	}
+//	@JsonCreator
+//	public PartnerStub(@JsonProperty("name") String name, @JsonProperty("account") String account, @JsonProperty("contact.name") String pName,
+//			@JsonProperty("contact.phone") String pPhone, @JsonProperty("contact.email") String pEmail) {
+//		this(name, account, new PartnerContactStub(pName, pPhone, pEmail));
+//	}
 
 	/*
 	 * (non-Javadoc)
@@ -108,7 +112,7 @@ public class PartnerStub {
 	/**
 	 * @return the id
 	 */
-	@JsonIgnore
+//	@JsonIgnore
 	public Integer getId() {
 		return id;
 	}

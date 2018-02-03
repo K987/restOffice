@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jboss.remoting3:jboss-remoting:3.2.14.GA">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jboss.remoting3/jboss-remoting/3.2.14.GA/3b46395e73af33e543ca0382d1958b4aed97b29d/jboss-remoting-3.2.14.GA.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jboss.remoting3/jboss-remoting/3.2.14.GA/ff2ecb8b2c0b6c25105806fbb620e802ad59fc97/jboss-remoting-3.2.14.GA-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

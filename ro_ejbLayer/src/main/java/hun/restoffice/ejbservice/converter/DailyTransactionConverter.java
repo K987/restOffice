@@ -8,8 +8,8 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
+import hun.restoffice.ejbservice.domain.DailyTransactionStub;
 import hun.restoffice.persistence.entity.dailyTransaction.DailyIncome;
-import hun.restoffice.remoteClient.domain.DailyTransactionStub;
 
 /**
  *  

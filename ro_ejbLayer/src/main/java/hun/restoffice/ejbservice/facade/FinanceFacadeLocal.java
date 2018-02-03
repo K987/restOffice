@@ -10,8 +10,8 @@ import javax.ejb.Local;
 import hun.restoffice.ejbservice.domain.CostCenterStub;
 import hun.restoffice.ejbservice.domain.ExpenseStub;
 import hun.restoffice.ejbservice.domain.ExpenseTypeStub;
-import hun.restoffice.remoteClient.domain.IncomeStub;
-import hun.restoffice.remoteClient.exception.FacadeException;
+import hun.restoffice.ejbservice.domain.IncomeStub;
+import hun.restoffice.ejbservice.exception.FacadeException;
 
 
 

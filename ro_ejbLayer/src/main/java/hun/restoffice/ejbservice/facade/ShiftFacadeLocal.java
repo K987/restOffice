@@ -8,8 +8,8 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import hun.restoffice.ejbservice.domain.CalendarScheduleStub;
 import hun.restoffice.ejbservice.exception.AdaptorException;
-import hun.restoffice.remoteClient.domain.CalendarScheduleStub;
 
 /**
  *  Shift business facade

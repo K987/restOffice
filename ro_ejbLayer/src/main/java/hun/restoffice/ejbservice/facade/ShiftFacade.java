@@ -13,14 +13,13 @@ import javax.ejb.Stateless;
 import org.apache.log4j.Logger;
 
 import hun.restoffice.ejbservice.converter.ShiftConverterLocal;
+import hun.restoffice.ejbservice.domain.CalendarScheduleStub;
+import hun.restoffice.ejbservice.domain.EmployeeShiftStub;
 import hun.restoffice.ejbservice.exception.AdaptorException;
 import hun.restoffice.ejbservice.exception.ApplicationError;
+import hun.restoffice.ejbservice.exception.FacadeException;
 import hun.restoffice.persistence.exception.PersistenceServiceException;
 import hun.restoffice.persistence.service.ShiftServiceLocal;
-import hun.restoffice.remoteClient.domain.CalendarScheduleStub;
-import hun.restoffice.remoteClient.domain.EmployeeShiftStub;
-import hun.restoffice.remoteClient.exception.FacadeException;
-import hun.restoffice.remoteClient.facade.ShiftFacadeRemote;
 
 /**
  *  Shift business faacade
