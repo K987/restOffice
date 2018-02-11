@@ -16,17 +16,19 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
 
+import hu.rest.hal.exception.ResourceProcessingException;
 import hu.rest.hal.exception.ResourceWriteException;
-import hu.rest.hal.representation.Representation;
+import hu.rest.hal.jaxrs.HalMediaType;
+import hu.rest.hal.jaxrs.Representable;
 
 /**
  * @author kalmankostenszky
  *
  */
+@SuppressWarnings("rawtypes")
 @Provider
-@Produces({ HalMediaType.HAL_JSON, HalMediaType.HAL_XML })
-public class HalBodyWriter implements MessageBodyWriter<Representation> {
-
+@Produces({ HalMediaType.MEDIATYPE_HAL_JSON, HalMediaType.MEDIATYPE_HAL_XML })
+public class HalBodyWriter implements MessageBodyWriter<Representable> {
 
     /*
      * (non-Javadoc)
@@ -38,9 +40,9 @@ public class HalBodyWriter implements MessageBodyWriter<Representation> {
     @Override
     public boolean isWriteable(final Class<?> type, final Type genericType, final Annotation[] annotations,
             final MediaType mediaType) {
-        if ((mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_JSON)
-                || mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_XML))
-                && Representation.class.isAssignableFrom(type))
+        if ((mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_JSON_TYPE)
+                || mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_XML_TYPE))
+                && Representable.class.isAssignableFrom(type))
             return true;
         else
             return false;
@@ -54,7 +56,7 @@ public class HalBodyWriter implements MessageBodyWriter<Representation> {
      * javax.ws.rs.core.MediaType)
      */
     @Override
-    public long getSize(final Representation t, final Class<?> type, final Type genericType,
+    public long getSize(final Representable t, final Class<?> type, final Type genericType,
             final Annotation[] annotations, final MediaType mediaType) {
         // TODO Auto-generated method stub
         return 0;
@@ -69,23 +71,23 @@ public class HalBodyWriter implements MessageBodyWriter<Representation> {
      * java.io.OutputStream)
      */
     @Override
-    public void writeTo(final Representation t, final Class<?> type, final Type genericType,
+    public void writeTo(final Representable t, final Class<?> type, final Type genericType,
             final Annotation[] annotations, final MediaType mediaType, final MultivaluedMap<String, Object> httpHeaders,
             final OutputStream entityStream) throws IOException, WebApplicationException {
 
         OutputStreamWriter writer = new OutputStreamWriter(entityStream, "UTF-8");
-        if (mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_JSON)) {
+        if (mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_JSON_TYPE)) {
             try {
-                Converter.JSON.writeTo(t, writer);
-            } catch (ResourceWriteException e) {
+                Converter.JSON.writeTo(t.asRepresentation(), writer);
+            } catch (ResourceWriteException | ResourceProcessingException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
                 throw new IOException();
             }
-        } else if (mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_XML)) {
+        } else if (mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_XML_TYPE)) {
             try {
-                Converter.XML.writeTo(t, writer);
-            } catch (ResourceWriteException e) {
+                Converter.XML.writeTo(t.asRepresentation(), writer);
+            } catch (ResourceWriteException | ResourceProcessingException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
                 throw new IOException();

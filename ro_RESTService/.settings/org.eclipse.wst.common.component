@@ -3,7 +3,7 @@
 	<wb-module deploy-name="ro_RESTService">
 		<property name="context-root" value="ro_RESTService"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/java"/>
-		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/hal_k987/hal_k987">
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/HAL-Creator/HAL-Creator">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
 	</wb-module>

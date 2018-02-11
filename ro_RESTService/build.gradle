@@ -11,5 +11,5 @@ dependencies {
   	providedCompile project(':ro_ejbLayer')
   	providedCompile group: 'javax', name: 'javaee-api', version: '7.0'
   	//providedCompile group: 'org.jboss.resteasy', name: 'resteasy-jackson-provider', version: '2.3.4.Final'
-  	runtime project(':hal_k987')
+  	compile project(':HAL-Creator')
 }

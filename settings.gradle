@@ -1,11 +1,5 @@
 include 'ro_persistenceLayer'
 include 'ro_ejbLayer'
 include 'ro_RESTService'
-include ':hal_k987'
-project(':hal_k987').projectDir = file('../hal_k987') 
-//include 'ro_webLayer'
-//include 'ro_remoteApplication'
-//include 'ro_richClient'
-//include 'ro_mqService'
-//include 'ro_jmsClient'
-//include 'ro_richClient'
+include ':HAL-Creator'
+project(':HAL-Creator').projectDir = new File(settingsDir,'../HAL-Creator')  

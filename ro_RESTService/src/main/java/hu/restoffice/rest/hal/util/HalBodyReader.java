@@ -17,6 +17,7 @@ import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.Provider;
 
 import hu.rest.hal.exception.ResourceReadException;
+import hu.rest.hal.jaxrs.HalMediaType;
 import hu.rest.hal.representation.Representation;
 
 /**
@@ -24,7 +25,7 @@ import hu.rest.hal.representation.Representation;
  *
  */
 @Provider
-@Consumes({ HalMediaType.HAL_JSON, HalMediaType.HAL_XML })
+@Consumes({ HalMediaType.MEDIATYPE_HAL_JSON, HalMediaType.MEDIATYPE_HAL_XML })
 public class HalBodyReader implements MessageBodyReader<Representation> {
 
     /*
@@ -37,8 +38,8 @@ public class HalBodyReader implements MessageBodyReader<Representation> {
     @Override
     public boolean isReadable(final Class<?> type, final Type genericType, final Annotation[] annotations,
             final MediaType mediaType) {
-        if ((mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_JSON)
-                || mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_XML))
+        if ((mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_JSON_TYPE)
+                || mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_XML_TYPE))
                 && Representation.class.isAssignableFrom(type))
             return true;
         else
@@ -58,7 +59,7 @@ public class HalBodyReader implements MessageBodyReader<Representation> {
             final Annotation[] annotations, final MediaType mediaType, final MultivaluedMap<String, String> httpHeaders,
             final InputStream entityStream) throws IOException, WebApplicationException {
         InputStreamReader reader = new InputStreamReader(entityStream, "UTF-8");
-        if (mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_JSON)) {
+        if (mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_JSON_TYPE)) {
             try {
                 return Converter.JSON.readFrom(reader);
             } catch (ResourceReadException e) {
@@ -66,7 +67,7 @@ public class HalBodyReader implements MessageBodyReader<Representation> {
                 e.printStackTrace();
                 throw new IOException();
             }
-        } else if (mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_XML)) {
+        } else if (mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_XML_TYPE)) {
             try {
                 return Converter.XML.readFrom(reader);
             } catch (ResourceReadException e) {

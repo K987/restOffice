@@ -12,7 +12,7 @@ import hu.rest.hal.xml.XmlConverterImpl;
  * @author kalmankostenszky
  *
  */
-class Converter {
+public class Converter {
 
     static JsonConverter JSON = new JsonConverterImpl();
     static XmlConverter XML = new XmlConverterImpl();
