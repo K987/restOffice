@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: :jboss-client:">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/ro_richClient/lib/jboss-client.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
