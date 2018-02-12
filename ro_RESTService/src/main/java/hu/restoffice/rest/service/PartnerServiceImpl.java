@@ -37,7 +37,7 @@ import hun.restoffice.ejbservice.facade.PartnerFacadeLocal;
 @Stateless
 public class PartnerServiceImpl implements PartnerService {
 
-    private static final Logger LOG = Logger.getLogger(PartnerServiceImpl.class);
+    private static final Logger log = Logger.getLogger(PartnerServiceImpl.class);
 
     @Context
     UriInfo info;
@@ -52,13 +52,20 @@ public class PartnerServiceImpl implements PartnerService {
      */
     @Override
     public Response read(final Long id) throws AdaptorException {
+    	log.info("read invoked");
         List<PartnerContactStub> details = new ArrayList<>();
         details.add(new PartnerContactStub(10l, "fÅ‘", "1234", "aki@gmail.com"));
         PartnerStub stub = new PartnerStub(10l, "raiker kereskedelmi kft", "raiker", "1021212-3213132-321313",
                 "1024 Budapest Kis Ilona utca 3", "12235324-2313-21",
                 details);
 
-        return Response.ok(new Partner(stub)).build();
+       
+        try {
+			return Response.ok(new Partner(stub).asRepresentation()).build();
+		} catch (ResourceProcessingException e) {
+		log.error("nem jóó");
+		return null;
+		}
     }
 
     /*

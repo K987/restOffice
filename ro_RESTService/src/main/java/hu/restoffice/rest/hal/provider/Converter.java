@@ -1,7 +1,7 @@
 /**
  *
  */
-package hu.restoffice.rest.hal.util;
+package hu.restoffice.rest.hal.provider;
 
 import hu.rest.hal.json.JsonConverter;
 import hu.rest.hal.json.JsonConverterImpl;

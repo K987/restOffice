@@ -1,7 +1,7 @@
 /**
  *
  */
-package hu.restoffice.rest.hal.util;
+package hu.restoffice.rest.hal.provider;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -16,20 +16,23 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
 
+import org.apache.log4j.Logger;
+
 import hu.rest.hal.exception.ResourceProcessingException;
 import hu.rest.hal.exception.ResourceWriteException;
 import hu.rest.hal.jaxrs.HalMediaType;
 import hu.rest.hal.jaxrs.Representable;
+import hu.rest.hal.representation.Representation;
 
 /**
  * @author kalmankostenszky
  *
  */
-@SuppressWarnings("rawtypes")
 @Provider
 @Produces({ HalMediaType.MEDIATYPE_HAL_JSON, HalMediaType.MEDIATYPE_HAL_XML })
-public class HalBodyWriter implements MessageBodyWriter<Representable> {
+public class RepresentationBodyWriter implements MessageBodyWriter<Representation> {
 
+	private static final Logger log = Logger.getLogger(RepresentationBodyWriter.class);
     /*
      * (non-Javadoc)
      *
@@ -40,12 +43,16 @@ public class HalBodyWriter implements MessageBodyWriter<Representable> {
     @Override
     public boolean isWriteable(final Class<?> type, final Type genericType, final Annotation[] annotations,
             final MediaType mediaType) {
+    	log.info("isWriteable invoked representation");
         if ((mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_JSON_TYPE)
                 || mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_XML_TYPE))
-                && Representable.class.isAssignableFrom(type))
+                && (Representation.class.isAssignableFrom(type) || Representable.class.isAssignableFrom(type))) {
+        	log.info("returning true");
             return true;
-        else
+        } else {
+        	log.info("returning false");
             return false;
+        }
     }
 
     /*
@@ -56,7 +63,7 @@ public class HalBodyWriter implements MessageBodyWriter<Representable> {
      * javax.ws.rs.core.MediaType)
      */
     @Override
-    public long getSize(final Representable t, final Class<?> type, final Type genericType,
+    public long getSize(final Representation t, final Class<?> type, final Type genericType,
             final Annotation[] annotations, final MediaType mediaType) {
         // TODO Auto-generated method stub
         return 0;
@@ -71,23 +78,25 @@ public class HalBodyWriter implements MessageBodyWriter<Representable> {
      * java.io.OutputStream)
      */
     @Override
-    public void writeTo(final Representable t, final Class<?> type, final Type genericType,
+    public void writeTo(final Representation t, final Class<?> type, final Type genericType,
             final Annotation[] annotations, final MediaType mediaType, final MultivaluedMap<String, Object> httpHeaders,
             final OutputStream entityStream) throws IOException, WebApplicationException {
 
+    	log.info("writeTo invoked");
+    	
         OutputStreamWriter writer = new OutputStreamWriter(entityStream, "UTF-8");
         if (mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_JSON_TYPE)) {
             try {
-                Converter.JSON.writeTo(t.asRepresentation(), writer);
-            } catch (ResourceWriteException | ResourceProcessingException e) {
+                Converter.JSON.writeTo(t, writer);
+            } catch (ResourceWriteException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
                 throw new IOException();
             }
         } else if (mediaType.isCompatible(HalMediaType.MEDIATYPE_HAL_XML_TYPE)) {
             try {
-                Converter.XML.writeTo(t.asRepresentation(), writer);
-            } catch (ResourceWriteException | ResourceProcessingException e) {
+                Converter.XML.writeTo(t, writer);
+            } catch (ResourceWriteException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
                 throw new IOException();

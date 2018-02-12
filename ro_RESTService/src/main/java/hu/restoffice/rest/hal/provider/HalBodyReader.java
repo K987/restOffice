@@ -1,7 +1,7 @@
 /**
  *
  */
-package hu.restoffice.rest.hal.util;
+package hu.restoffice.rest.hal.provider;
 
 import java.io.IOException;
 import java.io.InputStream;
