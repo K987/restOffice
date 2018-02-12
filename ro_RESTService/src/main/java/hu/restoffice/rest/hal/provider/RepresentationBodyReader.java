@@ -26,7 +26,7 @@ import hu.rest.hal.representation.Representation;
  */
 @Provider
 @Consumes({ HalMediaType.MEDIATYPE_HAL_JSON, HalMediaType.MEDIATYPE_HAL_XML })
-public class HalBodyReader implements MessageBodyReader<Representation> {
+public class RepresentationBodyReader implements MessageBodyReader<Representation> {
 
     /*
      * (non-Javadoc)

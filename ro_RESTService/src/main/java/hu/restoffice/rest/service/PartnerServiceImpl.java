@@ -9,9 +9,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 import org.apache.log4j.Logger;
 import org.jdom2.Element;
@@ -39,8 +37,6 @@ public class PartnerServiceImpl implements PartnerService {
 
     private static final Logger log = Logger.getLogger(PartnerServiceImpl.class);
 
-    @Context
-    UriInfo info;
 
     @EJB
     private PartnerFacadeLocal facade;
@@ -52,20 +48,14 @@ public class PartnerServiceImpl implements PartnerService {
      */
     @Override
     public Response read(final Long id) throws AdaptorException {
-    	log.info("read invoked");
+        log.info("read invoked");
         List<PartnerContactStub> details = new ArrayList<>();
         details.add(new PartnerContactStub(10l, "fÅ‘", "1234", "aki@gmail.com"));
         PartnerStub stub = new PartnerStub(10l, "raiker kereskedelmi kft", "raiker", "1021212-3213132-321313",
                 "1024 Budapest Kis Ilona utca 3", "12235324-2313-21",
                 details);
 
-       
-        try {
-			return Response.ok(new Partner(stub).asRepresentation()).build();
-		} catch (ResourceProcessingException e) {
-		log.error("nem jóó");
-		return null;
-		}
+        return Response.ok(new Partner(stub)).build();
     }
 
     /*
@@ -75,8 +65,7 @@ public class PartnerServiceImpl implements PartnerService {
      */
     @Override
     public Response readAll() throws AdaptorException {
-        // TODO Auto-generated method stub
-        return null;
+        return Response.ok("alma").build();
     }
 
     /*
@@ -144,12 +133,14 @@ public class PartnerServiceImpl implements PartnerService {
             for (PartnerContactStub partnerContact : stub.getContacts()) {
                 details.add(new PartnerContact(partnerContact));
             }
-            JaxRsRepresentationBuilder b = JaxRsRepresentationBuilder.fromSelf(info, stub.getClass());
-            return b.link(b.getLinkBuilder("self", 11).rel("next").build())
-                    .property("legalName", stub.getLegalName())
+
+            JaxRsRepresentationBuilder b = JaxRsRepresentationBuilder.fromSelf(this);
+            return b.property("legalName", stub.getLegalName())
                     .property("shortName", stub.getShortName()).property("bankAccountNo", stub.getBankAccountNo())
                     .property("address", stub.getAddress()).property("taxNo", stub.getTaxNo())
-                    .property("contact details", details.toArray()).build();
+                    .property("contact details", details.toArray())
+                    .link(b.getLinkBuilder("self", "next").build())
+                    .build();
         }
 
         /*
