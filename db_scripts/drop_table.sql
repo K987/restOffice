@@ -13,11 +13,10 @@ drop table INCOME cascade;
 drop table EXPENSE_DETAIL cascade;
 --drop sequence EXPENSE_DETAIL_SEQ cascade;
 
-drop table PAYMENT_DETAIL cascade;
---drop sequence PAYMENT_DETAIL_SEQ cascade;
-
 drop table EXPENSE cascade;
 --drop sequence EXPENSE_SEQ cascade;
+drop table PAYMENT_DETAIL cascade;
+--drop sequence PAYMENT_DETAIL_SEQ cascade;
 
 drop table TRANSITION cascade;
 --drop sequence TRANSITION_SEQ cascade;
@@ -51,3 +50,25 @@ drop table PARTNER_CONTACT cascade;
 
 drop table PARTNER cascade;
 --drop sequence PARTNER_SEQ cascade;
+
+drop table JOB_TYPE cascade;
+
+drop table INCOME_FORM_TYPE cascade;
+
+drop table EMPLOYEE cascade;
+
+drop table REGISTER_TYPE cascade;
+
+drop table PARAM_INCOME_FORM_X_DEPOSIT_BOX cascade;
+
+drop table REGISTER cascade;
+
+drop table DAILY_CLOSE cascade;
+
+drop table DAILY_CLOSE_DETAIL cascade;
+
+drop table REGISTER_CLOSE cascade;
+
+drop table EMPLOYEE_SHIFT cascade;
+
+drop table EMPLOYEE_SHIFT_INCOME cascade;
