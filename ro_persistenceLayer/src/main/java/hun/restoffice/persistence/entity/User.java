@@ -1,65 +1,38 @@
 package hun.restoffice.persistence.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 
 /**
- * The persistent class for the users database table.
- * 
- * @author kalmankostenszky
+ * The persistent class for the ro_user database table.
+ *
  */
 @Entity
-@Table(name = "users")
-@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+@Table(name="ro_user")
+@NamedQuery(name="RoUser.findAll", query="SELECT r FROM RoUser r")
 public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "user_id", length = 50)
-	private String id;
+    @Id
+    @SequenceGenerator(name="RO_USER_USERID_GENERATOR", sequenceName="RO_USER_USER_ID_SEQ")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="RO_USER_USERID_GENERATOR")
+    @Column(name = "user_id", updatable = false)
+    private Long id;
 
-	@Column(name = "user_name", length = 100)
-	private String name;
+    public User() {
+    }
 
-	@Column(name = "user_pwd", nullable = false, length = 50)
-	private String pwd;
+    public Long getId() {
+        return id;
+    }
 
-	// TODO: add not nullabe to DB, maybe enum
-	@Column(name = "user_role", nullable = false, length = 50)
-	private String role;
-
-	public User() {
-	}
-
-	public String getId() {
-		return this.id;
-	}
-
-	public void setId(String userId) {
-		this.id = userId;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String userName) {
-		this.name = userName;
-	}
-
-	public String getPwd() {
-		return this.pwd;
-	}
-
-	public void setPwd(String userPwd) {
-		this.pwd = userPwd;
-	}
-
-	public String getRole() {
-		return this.role;
-	}
-
-	public void setRole(String userRole) {
-		this.role = userRole;
-	}
 }

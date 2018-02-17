@@ -1,4 +1,4 @@
-GRANT SELECT, INSERT, UPDATE ON
+GRANT SELECT, INSERT, UPDATE, DELETE ON
 cost_center,
 cost_type,
 daily_close,
@@ -27,7 +27,18 @@ register,
 register_close,
 register_type,
 ro_user,
-transition
+transition,
+register_type,
+register,
+register_close,
+ro_user,
+employee_shift_income,
+employee_shift,
+daily_close,
+income_form_type,
+employee,
+job_type,
+daily_close_detail
 TO ro_crud_role;
 
 GRANT USAGE, SELECT, UPDATE ON
