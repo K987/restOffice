@@ -1,115 +1,65 @@
 package hun.restoffice.persistence.type;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.Date;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import hun.restoffice.persistence.util.ParameterType;
 
 
 /**
  * The persistent class for the job_type database table.
- * 
+ *
  */
 @Entity
 @Table(name="job_type")
 @NamedQuery(name="JobType.findAll", query="SELECT j FROM JobType j")
-public class JobType implements Serializable {
-	private static final long serialVersionUID = 1L;
+@SequenceGenerator(name = "PARAMETER_TYPE_ID_GENERATOR", sequenceName = "JOB_TYPE_JOB_TYPE_ID_SEQ")
+@AttributeOverride(name = "id", column = @Column(name = "job_type_id", updatable = false))
+public class JobType extends ParameterType implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name="JOB_TYPE_JOBTYPEID_GENERATOR", sequenceName="JOB_TYPE_JOB_TYPE_ID_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="JOB_TYPE_JOBTYPEID_GENERATOR")
-	@Column(name="job_type_id", unique=true, nullable=false)
-	private Integer jobTypeId;
+    @Column(name="job_hourly_wage_amt", nullable=false, precision=12, scale=2)
+    private double jobHourlyWageAmt;
 
-	@Column(name="description_txt", length=500)
-	private String descriptionTxt;
+    @Column(name = "job_tip_share_pct", nullable = true, precision = 2, scale = 2)
+    private double jobTipSharePct;
 
-	@Column(name="job_hourly_wage_amt", nullable=false, precision=12, scale=2)
-	private BigDecimal jobHourlyWageAmt;
+    public JobType() {
+    }
 
-	@Column(name="job_tip_share_pct", nullable=false, precision=2, scale=2)
-	private BigDecimal jobTipSharePct;
+    public double getJobHourlyWageAmt() {
+        return jobHourlyWageAmt;
+    }
 
-	@Column(name="modification_status_cd", nullable=false)
-	private Boolean modificationStatusCd;
+    public void setJobHourlyWageAmt(final double jobHourlyWageAmt) {
+        this.jobHourlyWageAmt = jobHourlyWageAmt;
+    }
 
-	@Column(nullable=false, length=50)
-	private String name;
+    public double getJobTipSharePct() {
+        return jobTipSharePct;
+    }
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="valid_from_dttm", nullable=false)
-	private Date validFromDttm;
+    public void setJobTipSharePct(final double jobTipSharePct) {
+        this.jobTipSharePct = jobTipSharePct;
+    }
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="valid_to_dttm", nullable=false)
-	private Date validToDttm;
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "JobType [jobHourlyWageAmt=" + jobHourlyWageAmt + ", jobTipSharePct=" + jobTipSharePct + ", getId()="
+                + this.getId() + ", getDescription()=" + this.getDescription() + ", getName()=" + this.getName()
+                + ", getValidity()=" + this.getValidity() + "]";
+    }
 
-	public JobType() {
-	}
-
-	public Integer getJobTypeId() {
-		return this.jobTypeId;
-	}
-
-	public void setJobTypeId(Integer jobTypeId) {
-		this.jobTypeId = jobTypeId;
-	}
-
-	public String getDescriptionTxt() {
-		return this.descriptionTxt;
-	}
-
-	public void setDescriptionTxt(String descriptionTxt) {
-		this.descriptionTxt = descriptionTxt;
-	}
-
-	public BigDecimal getJobHourlyWageAmt() {
-		return this.jobHourlyWageAmt;
-	}
-
-	public void setJobHourlyWageAmt(BigDecimal jobHourlyWageAmt) {
-		this.jobHourlyWageAmt = jobHourlyWageAmt;
-	}
-
-	public BigDecimal getJobTipSharePct() {
-		return this.jobTipSharePct;
-	}
-
-	public void setJobTipSharePct(BigDecimal jobTipSharePct) {
-		this.jobTipSharePct = jobTipSharePct;
-	}
-
-	public Boolean getModificationStatusCd() {
-		return this.modificationStatusCd;
-	}
-
-	public void setModificationStatusCd(Boolean modificationStatusCd) {
-		this.modificationStatusCd = modificationStatusCd;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Date getValidFromDttm() {
-		return this.validFromDttm;
-	}
-
-	public void setValidFromDttm(Date validFromDttm) {
-		this.validFromDttm = validFromDttm;
-	}
-
-	public Date getValidToDttm() {
-		return this.validToDttm;
-	}
-
-	public void setValidToDttm(Date validToDttm) {
-		this.validToDttm = validToDttm;
-	}
 
 }

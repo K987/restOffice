@@ -1,7 +1,6 @@
 package hun.restoffice.persistence.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +14,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import hun.restoffice.persistence.type.IncomeFormType;
+import hun.restoffice.persistence.type.IncomeType;
 
 
 /**
@@ -34,83 +33,135 @@ public class DailyCloseDetail implements Serializable {
     @Column(name = "daily_close_detail_id", updatable = false)
     private long id;
 
-    @Column(name="in_register_flg", nullable=false)
-    private Boolean inRegister;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "income_form_type_id", nullable = false)
+    private IncomeType meanOfIncome;
 
-    @Column(name="income_amt", nullable=false, precision=12, scale=2)
-    private BigDecimal incomeTotal;
+    private double registeredAmt;
+
+    private double notRegisteredAmt;
+
+    @Column(name = "income_amt", nullable = false, precision = 12, scale = 2)
+    private double totalAmt;
+
+    // @Column(name="in_register_flg", nullable=false)
+    // private Boolean inRegister;
 
     //bi-directional many-to-one association to DailyClose
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "daily_close_id", nullable = false, updatable = false)
     private DailyClose dailyClose;
 
-    //uni-directional many-to-one association to Income
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name="income_id")
-    private Income income;
+    // //uni-directional many-to-one association to Income
+    // @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    // @JoinColumn(name="income_id")
+    // private Income income;
 
-    //uni-directional many-to-one association to IncomeFormType
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="income_form_type_id", nullable=false)
-    private IncomeFormType incomeForm;
 
     public DailyCloseDetail() {
     }
 
+    /**
+     * @return the id
+     */
     public long getId() {
         return id;
     }
 
-    public Boolean getInRegister() {
-        return inRegister;
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(final long id) {
+        this.id = id;
     }
 
-    public void setInRegister(final Boolean inRegisterFlg) {
-        inRegister = inRegisterFlg;
+    /**
+     * @return the meanOfIncome
+     */
+    public IncomeType getMeanOfIncome() {
+        return meanOfIncome;
     }
 
-    public BigDecimal getIncomeTotal() {
-        return incomeTotal;
+    /**
+     * @param meanOfIncome
+     *            the meanOfIncome to set
+     */
+    public void setMeanOfIncome(final IncomeType meanOfIncome) {
+        this.meanOfIncome = meanOfIncome;
     }
 
-    public void setIncomeTotal(final BigDecimal incomeAmt) {
-        incomeTotal = incomeAmt;
+    /**
+     * @return the registeredAmt
+     */
+    public double getRegisteredAmt() {
+        return registeredAmt;
     }
 
+    /**
+     * @param registeredAmt
+     *            the registeredAmt to set
+     */
+    public void setRegisteredAmt(final double registeredAmt) {
+        this.registeredAmt = registeredAmt;
+    }
+
+    /**
+     * @return the notRegisteredAmt
+     */
+    public double getNotRegisteredAmt() {
+        return notRegisteredAmt;
+    }
+
+    /**
+     * @param notRegisteredAmt
+     *            the notRegisteredAmt to set
+     */
+    public void setNotRegisteredAmt(final double notRegisteredAmt) {
+        this.notRegisteredAmt = notRegisteredAmt;
+    }
+
+    /**
+     * @return the totalAmt
+     */
+    public double getTotalAmt() {
+        return totalAmt;
+    }
+
+    /**
+     * @param totalAmt
+     *            the totalAmt to set
+     */
+    public void setTotalAmt(final double totalAmt) {
+        this.totalAmt = totalAmt;
+    }
+
+    /**
+     * @return the dailyClose
+     */
     public DailyClose getDailyClose() {
         return dailyClose;
     }
 
+    /**
+     * @param dailyClose
+     *            the dailyClose to set
+     */
     public void setDailyClose(final DailyClose dailyClose) {
         this.dailyClose = dailyClose;
     }
 
-    public Income getIncome() {
-        return income;
-    }
-
-    public void setIncome(final Income income) {
-        this.income = income;
-    }
-
-    public IncomeFormType getIncomeFormType() {
-        return incomeForm;
-    }
-
-    public void setIncomeFormType(final IncomeFormType incomeFormType) {
-        incomeForm = incomeFormType;
-    }
-
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "DailyCloseDetail [id=" + id + ", inRegister=" + inRegister + ", incomeTotal=" + incomeTotal
-                + ", dailyClose=" + dailyClose + ", income=" + income + ", incomeFormType=" + incomeForm + "]";
+        return "DailyCloseDetail [id=" + id + ", meanOfIncome=" + meanOfIncome + ", registeredAmt=" + registeredAmt
+                + ", notRegisteredAmt=" + notRegisteredAmt + ", totalAmt=" + totalAmt + ", dailyClose=" + dailyClose
+                + "]";
     }
+
 
 }

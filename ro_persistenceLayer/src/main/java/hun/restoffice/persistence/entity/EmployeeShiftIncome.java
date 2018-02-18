@@ -15,7 +15,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import hun.restoffice.persistence.type.IncomeFormType;
+import hun.restoffice.persistence.type.IncomeType;
 
 
 /**
@@ -45,7 +45,7 @@ public class EmployeeShiftIncome implements Serializable {
     //uni-directional many-to-one association to IncomeFormType
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="income_form_id", nullable=false)
-    private IncomeFormType incomeForm;
+    private IncomeType incomeForm;
 
     public EmployeeShiftIncome() {
     }
@@ -70,11 +70,11 @@ public class EmployeeShiftIncome implements Serializable {
         this.employeeShift = employeeShift;
     }
 
-    public IncomeFormType getIncomeFormType() {
+    public IncomeType getIncomeFormType() {
         return incomeForm;
     }
 
-    public void setIncomeFormType(final IncomeFormType incomeFormType) {
+    public void setIncomeFormType(final IncomeType incomeFormType) {
         incomeForm = incomeFormType;
     }
 

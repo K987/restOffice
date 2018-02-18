@@ -1,7 +1,6 @@
 package hun.restoffice.persistence.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -37,28 +36,28 @@ public class DailyClose implements Serializable {
     @Column(name = "daily_close_id", updatable = false)
     private Long id;
 
-    @Column(name = "booked_dttm")
-    private LocalDateTime bookedAt;
+    @Column(name = "registered_total_amt", nullable = false, precision = 12, scale = 2)
+    private double registeredTotal;
 
-    @Column(name = "cash_register_total_amt", nullable = false, precision = 12, scale = 2)
-    private BigDecimal cashRegisterTotal;
+    @Column(name = "income_total_amt", nullable = false, precision = 12, scale = 2)
+    private double incomeTotal;
+
+    @Column(name = "pos_total_amt", nullable = false, precision = 12, scale = 2)
+    private double posTotal;
 
     @Column(name = "close_day_dt", nullable = false)
     private LocalDate closeDay;
 
-    @Column(name = "create_dttm", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "income_total_amt", nullable = false, precision = 12, scale = 2)
-    private BigDecimal incomeTotal;
-
-    @Column(name = "pos_total_amt", nullable = false, precision = 12, scale = 2)
-    private BigDecimal posTotal;
+    @Column(name = "booked_dttm")
+    private LocalDateTime bookedAt;
 
     // uni-directional many-to-one association to RoUser
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "booked_user_id")
     private User bookedBy;
+
+    @Column(name = "create_dttm", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     // uni-directional many-to-one association to RoUser
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
@@ -92,12 +91,12 @@ public class DailyClose implements Serializable {
         bookedAt = bookedDttm;
     }
 
-    public BigDecimal getCashRegisterTotal() {
-        return cashRegisterTotal;
+    public double getRegisteredTotal() {
+        return registeredTotal;
     }
 
-    public void setCashRegisterTotal(final BigDecimal cashRegisterTotalAmt) {
-        cashRegisterTotal = cashRegisterTotalAmt;
+    public void setRegisteredTotal(final double registeredTotal) {
+        this.registeredTotal = registeredTotal;
     }
 
     public LocalDate getCloseDay() {
@@ -116,19 +115,19 @@ public class DailyClose implements Serializable {
         createdAt = createDttm;
     }
 
-    public BigDecimal getIncomeTotal() {
+    public double getIncomeTotal() {
         return incomeTotal;
     }
 
-    public void setIncomeTotal(final BigDecimal incomeTotalAmt) {
+    public void setIncomeTotal(final double incomeTotalAmt) {
         incomeTotal = incomeTotalAmt;
     }
 
-    public BigDecimal getPosTotal() {
+    public double getPosTotal() {
         return posTotal;
     }
 
-    public void setPosTotal(final BigDecimal posTotalAmt) {
+    public void setPosTotal(final double posTotalAmt) {
         posTotal = posTotalAmt;
     }
 
@@ -222,7 +221,7 @@ public class DailyClose implements Serializable {
      */
     @Override
     public String toString() {
-        return "DailyClose [id=" + id + ", bookedAt=" + bookedAt + ", cashRegisterTotal=" + cashRegisterTotal
+        return "DailyClose [id=" + id + ", bookedAt=" + bookedAt + ", cashRegisterTotal=" + registeredTotal
                 + ", closeDay=" + closeDay + ", createdAt=" + createdAt + ", incomeTotal=" + incomeTotal + ", posTotal="
                 + posTotal + ", bookedBy=" + bookedBy + ", createdBy=" + createdBy + ", dailyCloseDetails="
                 + dailyCloseDetails + ", employeeShifts=" + employeeShifts + ", registerCloses=" + registerCloses + "]";

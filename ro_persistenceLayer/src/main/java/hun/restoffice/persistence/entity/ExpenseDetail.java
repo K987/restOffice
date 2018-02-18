@@ -15,8 +15,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import hun.restoffice.persistence.type.CostCenter;
-import hun.restoffice.persistence.type.CostType;
+import hun.restoffice.persistence.type.CostCenterType;
+import hun.restoffice.persistence.type.CostCategoryType;
 
 
 /**
@@ -51,12 +51,12 @@ public class ExpenseDetail implements Serializable {
     //uni-directional many-to-one association to CostCenter
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="cost_center_id", nullable=false)
-    private CostCenter costCenter;
+    private CostCenterType costCenter;
 
     //uni-directional many-to-one association to CostType
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="cost_type_id", nullable=false)
-    private CostType costType;
+    private CostCategoryType costType;
 
     //bi-directional many-to-one association to Expense
     @ManyToOne(fetch=FetchType.LAZY)
@@ -102,19 +102,19 @@ public class ExpenseDetail implements Serializable {
         this.expenseVatPct = expenseVatPct;
     }
 
-    public CostCenter getCostCenter() {
+    public CostCenterType getCostCenter() {
         return costCenter;
     }
 
-    public void setCostCenter(final CostCenter costCenter) {
+    public void setCostCenter(final CostCenterType costCenter) {
         this.costCenter = costCenter;
     }
 
-    public CostType getCostType() {
+    public CostCategoryType getCostType() {
         return costType;
     }
 
-    public void setCostType(final CostType costType) {
+    public void setCostType(final CostCategoryType costType) {
         this.costType = costType;
     }
 

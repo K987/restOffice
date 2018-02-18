@@ -15,7 +15,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import hun.restoffice.persistence.type.IncomeType;
+import hun.restoffice.persistence.type.IncomeCategoryType;
 
 
 /**
@@ -54,7 +54,7 @@ public class IncomeDetail implements Serializable {
     //uni-directional many-to-one association to IncomeType
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="income_type_id", nullable=false)
-    private IncomeType incomeType;
+    private IncomeCategoryType incomeType;
 
     public IncomeDetail() {
     }
@@ -103,11 +103,11 @@ public class IncomeDetail implements Serializable {
         this.income = income;
     }
 
-    public IncomeType getIncomeType() {
+    public IncomeCategoryType getIncomeType() {
         return incomeType;
     }
 
-    public void setIncomeType(final IncomeType incomeType) {
+    public void setIncomeType(final IncomeCategoryType incomeType) {
         this.incomeType = incomeType;
     }
 

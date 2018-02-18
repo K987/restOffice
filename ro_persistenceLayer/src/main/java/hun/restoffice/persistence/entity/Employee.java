@@ -20,7 +20,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import hun.restoffice.persistence.type.JobType;
-import hun.restoffice.persistence.type.TemporalValidity;
+import hun.restoffice.persistence.util.TemporalValidity;
 
 /**
  * The persistent class for the employee database table.

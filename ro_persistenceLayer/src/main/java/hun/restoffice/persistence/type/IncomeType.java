@@ -1,92 +1,117 @@
 package hun.restoffice.persistence.type;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.Date;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import hun.restoffice.persistence.entity.DepositBox;
+import hun.restoffice.persistence.util.ParameterType;
 
 /**
- * The persistent class for the income_type database table.
- * 
+ * The persistent class for the income_form_type database table.
+ *
  */
 @Entity
-@Table(name="income_type")
-@NamedQuery(name="IncomeType.findAll", query="SELECT i FROM IncomeType i")
-public class IncomeType implements Serializable {
-	private static final long serialVersionUID = 1L;
+@Table(name = "income_form_type")
+@NamedQuery(name = "IncomeFormType.findAll", query = "SELECT i FROM IncomeFormType i")
+@SequenceGenerator(name = "PARAMETER_TYPE_ID_GENERATOR", sequenceName = "INCOME_FORM_TYPE_INCOME_FORM_TYPE_ID_SEQ")
+@AttributeOverride(name = "id", column = @Column(name = "income_form_type_id", updatable = false))
+public class IncomeType extends ParameterType implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name="INCOME_TYPE_INCOMETYPEID_GENERATOR", sequenceName="INCOME_TYPE_INCOME_TYPE_ID_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="INCOME_TYPE_INCOMETYPEID_GENERATOR")
-	@Column(name="income_type_id", unique=true, nullable=false)
-	private Integer incomeTypeId;
+    public IncomeType() {
+    }
 
-	@Column(name="description_txt", length=500)
-	private String descriptionTxt;
+    // TODO: add as column to database
+    private boolean accountedIncome;
 
-	@Column(name="modification_status_cd", nullable=false)
-	private Boolean modificationStatusCd;
+    // TODO: add as column to database
+    private double conversionRate;
 
-	@Column(nullable=false, length=50)
-	private String name;
+    // TODO: add as column to database
+    // join it to DepostiBox
+    private DepositBox defaultDepositBox;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="valid_from_dttm", nullable=false)
-	private Date validFromDttm;
+    // TODO: add column to database
+    @Enumerated(EnumType.ORDINAL)
+    private PaymentTypes paymentType;
+    /**
+     * @return the income
+     */
+    public boolean isAccountedIncome() {
+        return accountedIncome;
+    }
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="valid_to_dttm", nullable=false)
-	private Date validToDttm;
+    /**
+     * @param income
+     *            the income to set
+     */
+    public void setAccountedIncome(final boolean accounted) {
+        accountedIncome = accounted;
+    }
 
-	public IncomeType() {
-	}
+    /**
+     * @return the conversionRate
+     */
+    public double getConversionRate() {
+        return conversionRate;
+    }
 
-	public Integer getIncomeTypeId() {
-		return this.incomeTypeId;
-	}
+    /**
+     * @param conversionRate
+     *            the conversionRate to set
+     */
+    public void setConversionRate(final double conversionRate) {
+        this.conversionRate = conversionRate;
+    }
 
-	public void setIncomeTypeId(Integer incomeTypeId) {
-		this.incomeTypeId = incomeTypeId;
-	}
+    /**
+     * @return the defaultDepositBox
+     */
+    public DepositBox getDefaultDepositBox() {
+        return defaultDepositBox;
+    }
 
-	public String getDescriptionTxt() {
-		return this.descriptionTxt;
-	}
+    /**
+     * @param defaultDepositBox
+     *            the defaultDepositBox to set
+     */
+    public void setDefaultDepositBox(final DepositBox defaultDepositBox) {
+        this.defaultDepositBox = defaultDepositBox;
+    }
 
-	public void setDescriptionTxt(String descriptionTxt) {
-		this.descriptionTxt = descriptionTxt;
-	}
+    /**
+     * @return the paymentType
+     */
+    public PaymentTypes getPaymentType() {
+        return paymentType;
+    }
 
-	public Boolean getModificationStatusCd() {
-		return this.modificationStatusCd;
-	}
+    /**
+     * @param paymentType
+     *            the paymentType to set
+     */
+    public void setPaymentType(final PaymentTypes paymentType) {
+        this.paymentType = paymentType;
+    }
 
-	public void setModificationStatusCd(Boolean modificationStatusCd) {
-		this.modificationStatusCd = modificationStatusCd;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Date getValidFromDttm() {
-		return this.validFromDttm;
-	}
-
-	public void setValidFromDttm(Date validFromDttm) {
-		this.validFromDttm = validFromDttm;
-	}
-
-	public Date getValidToDttm() {
-		return this.validToDttm;
-	}
-
-	public void setValidToDttm(Date validToDttm) {
-		this.validToDttm = validToDttm;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "MeanOfIncome [accountedIncome=" + accountedIncome + ", conversionRate=" + conversionRate
+                + ", defaultDepositBox=" + defaultDepositBox
+                + ", paymentType=" + paymentType + "]";
+    }
 
 }

@@ -5,18 +5,18 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import hun.restoffice.persistence.type.DocumentType;
-import hun.restoffice.persistence.type.PaymentMethod;
+import hun.restoffice.persistence.type.DocumentTypes;
+import hun.restoffice.persistence.type.PaymentMethodType;
+import hun.restoffice.persistence.type.PaymentTypes;
 
 
 /**
@@ -45,17 +45,15 @@ public class PaymentDetail implements Serializable {
     private LocalDate issueDate;
 
     @Column(name="paid_dt")
-    private LocalDate paidDate;
+    private LocalDate fulfillmentDt;
 
-    //uni-directional many-to-one association to DocumentType
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="document_type_id", nullable=false)
-    private DocumentType documentType;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "document_type_cd", nullable = false)
+    private DocumentTypes documentType;
 
-    //uni-directional many-to-one association to PaymentMethod
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="payment_method_id", nullable=false)
-    private PaymentMethod paymentMethod;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "payment_type_cd", nullable = false)
+    private PaymentTypes paymentType;
 
     public PaymentDetail() {
     }
@@ -89,38 +87,38 @@ public class PaymentDetail implements Serializable {
     }
 
     public LocalDate getPaidDate() {
-        return paidDate;
+        return fulfillmentDt;
     }
 
     public void setPaidDate(final LocalDate paidDt) {
-        paidDate = paidDt;
+        fulfillmentDt = paidDt;
     }
 
-    public DocumentType getDocumentType() {
+    public DocumentTypes getDocumentType() {
         return documentType;
     }
 
-    public void setDocumentType(final DocumentType documentType) {
+    public void setDocumentType(final DocumentTypes documentType) {
         this.documentType = documentType;
     }
 
-    public PaymentMethod getPaymentMethod() {
+    public PaymentMethodType getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(final PaymentMethod paymentMethod) {
+    public void setPaymentMethod(final PaymentMethodType paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         return "PaymentDetail [id=" + id + ", dueDate=" + dueDate + ", expiryDate=" + expiryDate + ", issueDate="
-                + issueDate + ", paidDate=" + paidDate + ", documentType=" + documentType + ", paymentMethod="
+                + issueDate + ", paidDate=" + fulfillmentDt + ", documentType=" + documentType + ", paymentMethod="
                 + paymentMethod + "]";
     }
 }

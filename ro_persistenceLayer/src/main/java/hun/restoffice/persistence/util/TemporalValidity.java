@@ -1,4 +1,4 @@
-package hun.restoffice.persistence.type;
+package hun.restoffice.persistence.util;
 
 import java.time.LocalDateTime;
 
@@ -63,7 +63,7 @@ public class TemporalValidity {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override

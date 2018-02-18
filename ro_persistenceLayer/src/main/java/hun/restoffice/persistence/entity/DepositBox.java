@@ -3,6 +3,7 @@ package hun.restoffice.persistence.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import hun.restoffice.persistence.type.PaymentTypes;
 
 
 /**
@@ -34,8 +37,11 @@ public class DepositBox implements Serializable {
     @Column(name = "deposit_box_id", updatable = false)
     private Long id;
 
-    @Column(name="deposit_box_type_cd", nullable=false)
-    private Integer depositBoxType;
+    @Column(name = "default_payment_type", unique = true)
+    private PaymentTypes defaultPaymentType;
+
+    @Column(name = "allowed_payment_types")
+    private Set<PaymentTypes> allowedPayments;
 
     @Column(name="description_txt", nullable=false, length=500)
     private String description;
@@ -67,11 +73,11 @@ public class DepositBox implements Serializable {
     }
 
     public Integer getDepositBoxType() {
-        return depositBoxType;
+        return defaultPaymentType;
     }
 
     public void setDepositBoxType(final Integer depositBoxTypeCd) {
-        depositBoxType = depositBoxTypeCd;
+        defaultPaymentType = depositBoxTypeCd;
     }
 
     public String getDescription() {
@@ -185,7 +191,7 @@ public class DepositBox implements Serializable {
      */
     @Override
     public String toString() {
-        return "DepositBox [id=" + id + ", depositBoxType=" + depositBoxType + ", description=" + description
+        return "DepositBox [id=" + id + ", depositBoxType=" + defaultPaymentType + ", description=" + description
                 + ", name=" + name + ", expenses=" + expenses + ", incomes=" + incomes + ", fromTranistions="
                 + fromTranistions + ", toTransitions=" + toTransitions + "]";
     }

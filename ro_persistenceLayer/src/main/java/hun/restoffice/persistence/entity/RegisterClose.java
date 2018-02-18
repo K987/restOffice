@@ -1,7 +1,6 @@
 package hun.restoffice.persistence.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -35,7 +34,7 @@ public class RegisterClose implements Serializable {
     private Long id;
 
     @Column(name="close_amt", nullable=false, precision=12, scale=2)
-    private BigDecimal closeAmt;
+    private double closeAmt;
 
     @Column(name="close_dt", nullable=false)
     private LocalDate closeDate;
@@ -68,11 +67,11 @@ public class RegisterClose implements Serializable {
         return id;
     }
 
-    public BigDecimal getCloseAmt() {
+    public double getCloseAmt() {
         return closeAmt;
     }
 
-    public void setCloseAmt(final BigDecimal closeAmt) {
+    public void setCloseAmt(final double closeAmt) {
         this.closeAmt = closeAmt;
     }
 
@@ -126,7 +125,7 @@ public class RegisterClose implements Serializable {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
