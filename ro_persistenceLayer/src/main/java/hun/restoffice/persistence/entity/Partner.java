@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,7 +53,7 @@ public class Partner implements Serializable {
     @Embedded
     private TemporalValidity validity;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "partner_contact", joinColumns = @JoinColumn(name = "partner_id"))
     private List<PartnerContact> partnerContacts;
 
@@ -117,14 +118,12 @@ public class Partner implements Serializable {
 
     public PartnerContact addPartnerContact(final PartnerContact partnerContact) {
         getPartnerContacts().add(partnerContact);
-        partnerContact.setPartner(this);
 
         return partnerContact;
     }
 
     public PartnerContact removePartnerContact(final PartnerContact partnerContact) {
         getPartnerContacts().remove(partnerContact);
-        partnerContact.setPartner(null);
 
         return partnerContact;
     }
