@@ -33,9 +33,9 @@ public class PartnerContact implements Serializable {
     public PartnerContact() {
     }
 
-    public Long getId() {
-        return id;
-    }
+    // public Long getId() {
+    // return id;
+    // }
 
     public String getCellPhoneNo() {
         return cellPhoneNo;
