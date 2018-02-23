@@ -1,18 +1,18 @@
 package hun.restoffice.persistence.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -52,9 +52,9 @@ public class Partner implements Serializable {
     @Embedded
     private TemporalValidity validity;
 
-    //bi-directional many-to-one association to PartnerContact
-    @OneToMany(mappedBy = "partner", fetch = FetchType.LAZY)
-    private List<PartnerContact> partnerContacts = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "partner_contact", joinColumns = @JoinColumn(name = "partner_id"))
+    private List<PartnerContact> partnerContacts;
 
     public Partner() {
     }
@@ -131,7 +131,7 @@ public class Partner implements Serializable {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
