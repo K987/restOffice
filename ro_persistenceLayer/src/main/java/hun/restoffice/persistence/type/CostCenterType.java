@@ -40,14 +40,13 @@ public class CostCenterType extends ParameterType implements Serializable {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "CostCenterType [parent=" + parent + ", getId()=" + this.getId() + ", getDescription()="
-                + this.getDescription() + ", getName()=" + this.getName() + ", getValidity()=" + this.getValidity()
-                + "]";
+        return "CostCenterType [parent=" + parent + ", parameterType=" + super.toString() + "]";
     }
+
 
 }

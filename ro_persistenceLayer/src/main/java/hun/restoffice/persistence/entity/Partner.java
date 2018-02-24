@@ -13,11 +13,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import hun.restoffice.persistence.util.TemporalValidity;
+import hun.restoffice.persistence.util.Effectivity;
 
 /**
  * The persistent class for the partner database table.
@@ -48,10 +49,18 @@ public class Partner implements Serializable {
     private String shortName;
 
     @Column(name="tax_id_no", length=50)
-    private String taxIdNo;
+    private String taxId;
 
     @Embedded
-    private TemporalValidity validity;
+    private Effectivity effectivity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "create_user_id", nullable = false, updatable = false)
+    private User creator;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "last_modified_user_id")
+    private User lastModifier;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "partner_contact", joinColumns = @JoinColumn(name = "partner_id"))
@@ -62,6 +71,10 @@ public class Partner implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    protected void setId(final Long id) {
+        this.id = id;
     }
 
     public String getBankAccountNo() {
@@ -96,25 +109,25 @@ public class Partner implements Serializable {
         this.shortName = shortName;
     }
 
-    public String getTaxIdNo() {
-        return taxIdNo;
+    public String getTaxId() {
+        return taxId;
     }
 
-    public void setTaxIdNo(final String taxIdNo) {
-        this.taxIdNo = taxIdNo;
+    public void setTaxId(final String taxId) {
+        this.taxId = taxId;
     }
 
     public List<PartnerContact> getPartnerContacts() {
         return partnerContacts;
     }
 
-    public TemporalValidity getValidity() {
-        return validity;
+    public Effectivity getEffectivity() {
+        return effectivity;
     }
 
-    // public void setPartnerContacts(final List<PartnerContact> partnerContacts) {
-    // this.partnerContacts = partnerContacts;
-    // }
+    protected void setPartnerContacts(final List<PartnerContact> partnerContacts) {
+        this.partnerContacts = partnerContacts;
+    }
 
     public PartnerContact addPartnerContact(final PartnerContact partnerContact) {
         getPartnerContacts().add(partnerContact);
@@ -128,6 +141,47 @@ public class Partner implements Serializable {
         return partnerContact;
     }
 
+    /**
+     * @return the creator
+     */
+    public User getCreator() {
+        return creator;
+    }
+
+    /**
+     * @param creator
+     *            the creator to set
+     */
+    protected void setCreator(final User creator) {
+        this.creator = creator;
+    }
+
+    /**
+     * @return the lastModifier
+     */
+    public User getLastModifier() {
+        return lastModifier;
+    }
+
+    /**
+     * @param lastModifier
+     *            the lastModifier to set
+     */
+    protected void setLastModifier(final User lastModifier) {
+        this.lastModifier = lastModifier;
+    }
+
+
+
+    /**
+     * @param effectivity
+     *            the effectivity to set
+     */
+    protected void setEffectivity(final Effectivity effectivity) {
+        this.effectivity = effectivity;
+    }
+
+
     /*
      * (non-Javadoc)
      *
@@ -136,8 +190,7 @@ public class Partner implements Serializable {
     @Override
     public String toString() {
         return "Partner [id=" + id + ", bankAccountNo=" + bankAccountNo + ", legalAddress=" + legalAddress
-                + ", legalName=" + legalName + ", shortName=" + shortName + ", taxIdNo=" + taxIdNo + ", validity="
-                + validity + ", partnerContacts=" + partnerContacts + "]";
+                + ", legalName=" + legalName + ", shortName=" + shortName + ", taxIdNo=" + taxId + ", effectivity="
+                + effectivity + ", partnerContacts=" + partnerContacts + "]";
     }
-
 }

@@ -29,7 +29,7 @@ public abstract class ParameterType implements Serializable {
     private String name;
 
     @Embedded
-    private TemporalValidity validity;
+    private Effectivity effectivity;
 
     public ParameterType() {
     }
@@ -54,8 +54,8 @@ public abstract class ParameterType implements Serializable {
         this.name = name;
     }
 
-    public TemporalValidity getValidity() {
-        return validity;
+    public Effectivity getEffectivity() {
+        return effectivity;
     }
 
 }

@@ -33,25 +33,25 @@ public class Transition implements Serializable {
     @Column(name = "transition_id", updatable = false)
     private Long id;
 
-    @Column(name="transition_amt", nullable=false, precision=12, scale=2)
-    private BigDecimal transitionAmt;
+    @Column(name = "transition_amt", nullable = false, updatable = false, precision = 12, scale = 2)
+    private BigDecimal amount;
 
-    @Column(name="transition_dttm", nullable=false)
-    private LocalDateTime performedDateTime;
+    @Column(name = "transition_dttm", updatable = false, nullable = false)
+    private LocalDateTime performedAt;
 
     //bi-directional many-to-one association to DepositBox
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="from_deposit_box_id", nullable=false)
+    @JoinColumn(name = "from_deposit_box_id", updatable = false, nullable = false)
     private DepositBox from;
 
     //bi-directional many-to-one association to DepositBox
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="to_deposit_box_id", nullable=false)
+    @JoinColumn(name = "to_deposit_box_id", updatable = false, nullable = false)
     private DepositBox to;
 
     //uni-directional many-to-one association to RoUser
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name = "user_id", updatable = false, nullable = false)
     private User createdBy;
 
     public Transition() {
@@ -61,20 +61,24 @@ public class Transition implements Serializable {
         return id;
     }
 
-    public BigDecimal getTransitionAmt() {
-        return transitionAmt;
+    protected void setId(final Long id) {
+        this.id = id;
     }
 
-    public void setTransitionAmt(final BigDecimal transitionAmt) {
-        this.transitionAmt = transitionAmt;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public LocalDateTime getPerformedDateTime() {
-        return performedDateTime;
+    public void setAmount(final BigDecimal transitionAmt) {
+        amount = transitionAmt;
     }
 
-    public void setPerformedDateTime(final LocalDateTime transitionDttm) {
-        performedDateTime = transitionDttm;
+    public LocalDateTime getPerformedAt() {
+        return performedAt;
+    }
+
+    public void setPerformedAt(final LocalDateTime transitionDttm) {
+        performedAt = transitionDttm;
     }
 
     public DepositBox getFrom() {
@@ -97,19 +101,21 @@ public class Transition implements Serializable {
         return createdBy;
     }
 
+    public void setCreatedBy(final User roUser) {
+        createdBy = roUser;
+    }
+
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "Transition [id=" + id + ", transitionAmt=" + transitionAmt + ", performedDateTime=" + performedDateTime
+        return "Transition [id=" + id + ", transitionAmt=" + amount + ", performedDateTime=" + performedAt
                 + ", from=" + from + ", to=" + to + ", createdBy=" + createdBy + "]";
     }
 
-    public void setRoUser(final User roUser) {
-        createdBy = roUser;
-    }
+
 
 }

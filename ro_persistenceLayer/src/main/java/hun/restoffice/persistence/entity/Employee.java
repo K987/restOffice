@@ -20,7 +20,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import hun.restoffice.persistence.type.JobType;
-import hun.restoffice.persistence.util.TemporalValidity;
+import hun.restoffice.persistence.util.Effectivity;
 
 /**
  * The persistent class for the employee database table.
@@ -57,7 +57,7 @@ public class Employee implements Serializable {
     private List<EmployeeShift> employeeShifts = new ArrayList<>();
 
     @Embedded
-    TemporalValidity validity;
+    Effectivity effectivity;
 
     public Employee() {
     }
@@ -90,8 +90,8 @@ public class Employee implements Serializable {
         this.name = name;
     }
 
-    public TemporalValidity getValidity() {
-        return validity;
+    public Effectivity getEffectivity() {
+        return effectivity;
     }
 
     public JobType getJobType() {
@@ -132,7 +132,7 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return "Employee [id=" + id + ", hourlyWage=" + hourlyWage + ", tipSharePct=" + tipSharePct + ", name=" + name
-                + ", jobType=" + jobType + ", employeeShifts=" + employeeShifts + ", validity=" + validity + "]";
+                + ", jobType=" + jobType + ", employeeShifts=" + employeeShifts + ", effectivity=" + effectivity + "]";
     }
 
 }

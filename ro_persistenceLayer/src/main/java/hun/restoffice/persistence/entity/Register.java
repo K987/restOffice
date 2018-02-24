@@ -16,7 +16,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import hun.restoffice.persistence.type.RegisterType;
-import hun.restoffice.persistence.util.TemporalValidity;
+import hun.restoffice.persistence.util.Effectivity;
 
 
 /**
@@ -45,7 +45,7 @@ public class Register implements Serializable {
     private RegisterType registerType;
 
     @Embedded
-    private TemporalValidity validity;
+    private Effectivity validity;
 
     public Register() {
     }
@@ -62,7 +62,7 @@ public class Register implements Serializable {
         this.registerNo = registerNo;
     }
 
-    public TemporalValidity getValidity() {
+    public Effectivity getValidity() {
         return validity;
     }
 
@@ -76,7 +76,7 @@ public class Register implements Serializable {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override

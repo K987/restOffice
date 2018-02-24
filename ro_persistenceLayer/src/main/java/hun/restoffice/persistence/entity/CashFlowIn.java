@@ -20,23 +20,23 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "deposit_box_x_income")
+@Table(name = "cashflow_in")
 @NamedQuery(name = "DepositBoxXIncome.findAll", query = "SELECT d FROM DepositBoxXIncome d")
-public class DepositBoxXIncome implements Serializable {
+public class CashFlowIn implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @SequenceGenerator(name = "DEPOSIT_BOX_X_INCOME_DEPOSITBOXXINCOMEID_GENERATOR", sequenceName = "DEPOSIT_BOX_X_INCOME_DEPOSIT_BOX_X_INCOME_ID_SEQ")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DEPOSIT_BOX_X_INCOME_DEPOSITBOXXINCOMEID_GENERATOR")
-    @Column(name = "deposit_box_x_income_id", updatable = false)
+    @Column(name = "cashflow_in_id", updatable = false)
     private Long id;
 
-    @Column(name = "realized_on_dttm")
-    private LocalDateTime realizedOn;
+    @Column(name = "registered_dttm", nullable = false, updatable = false)
+    private LocalDateTime registered;
 
     // bi-directional many-to-one association to DepositBox
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "deposit_box_id", nullable = false, updatable = false)
+    @JoinColumn(name = "deposit_box_id", nullable = false)
     private DepositBox depositBox;
 
     // uni-directional many-to-one association to Income
@@ -44,19 +44,26 @@ public class DepositBoxXIncome implements Serializable {
     @JoinColumn(name = "income_id", nullable = false, updatable = false)
     private Income income;
 
-    public DepositBoxXIncome() {
+    @Column(name = "acconted_dttm")
+    private LocalDateTime accounted;
+
+    public CashFlowIn() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public LocalDateTime getRealizedOn() {
-        return realizedOn;
+    protected void setId(final Long id) {
+        this.id = id;
     }
 
-    public void setRegisteredDttm(final LocalDateTime relaizedDttm) {
-        realizedOn = relaizedDttm;
+    public LocalDateTime getRegistered() {
+        return registered;
+    }
+
+    protected void setRegistered(final LocalDateTime registeredDttm) {
+        registered = registeredDttm;
     }
 
     public DepositBox getDepositBox() {
@@ -75,6 +82,22 @@ public class DepositBoxXIncome implements Serializable {
         this.income = income;
     }
 
+    /**
+     * @return the accounted
+     */
+    public LocalDateTime getAccounted() {
+        return accounted;
+    }
+
+
+    /**
+     * @param accounted
+     *            the accounted to set
+     */
+    public void setAccounted(final LocalDateTime accounted) {
+        this.accounted = accounted;
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -82,8 +105,8 @@ public class DepositBoxXIncome implements Serializable {
      */
     @Override
     public String toString() {
-        return "DepositBoxXIncome [id=" + id + ", realizedOn=" + realizedOn + ", depositBox=" + depositBox + ", income="
-                + income + "]";
+        return "CashFlowIn [id=" + id + ", registered=" + registered + ", depositBox=" + depositBox + ", income="
+                + income + ", accounted=" + accounted + "]";
     }
 
 }

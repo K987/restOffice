@@ -15,7 +15,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import hun.restoffice.persistence.type.DocumentTypes;
-import hun.restoffice.persistence.type.PaymentMethodType;
 import hun.restoffice.persistence.type.PaymentTypes;
 
 
@@ -102,12 +101,12 @@ public class PaymentDetail implements Serializable {
         this.documentType = documentType;
     }
 
-    public PaymentMethodType getPaymentMethod() {
-        return paymentMethod;
+    public PaymentTypes getPaymentMethod() {
+        return paymentType;
     }
 
-    public void setPaymentMethod(final PaymentMethodType paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setPaymentMethod(final PaymentTypes paymentMethod) {
+        paymentType = paymentMethod;
     }
 
     /*
@@ -118,7 +117,7 @@ public class PaymentDetail implements Serializable {
     @Override
     public String toString() {
         return "PaymentDetail [id=" + id + ", dueDate=" + dueDate + ", expiryDate=" + expiryDate + ", issueDate="
-                + issueDate + ", paidDate=" + fulfillmentDt + ", documentType=" + documentType + ", paymentMethod="
-                + paymentMethod + "]";
+                + issueDate + ", paidDate=" + fulfillmentDt + ", documentType=" + documentType + ", paymentType="
+                + paymentType + "]";
     }
 }

@@ -3,10 +3,11 @@ package hun.restoffice.persistence.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import hun.restoffice.persistence.type.PaymentTypes;
-
+import hun.restoffice.persistence.type.DepositBoxTypes;
 
 /**
  * The persistent class for the deposit_box database table.
@@ -32,36 +32,34 @@ public class DepositBox implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="DEPOSIT_BOX_DEPOSITBOXID_GENERATOR", sequenceName="DEPOSIT_BOX_DEPOSIT_BOX_ID_SEQ")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="DEPOSIT_BOX_DEPOSITBOXID_GENERATOR")
+    @SequenceGenerator(name = "DEPOSIT_BOX_DEPOSITBOXID_GENERATOR", sequenceName = "DEPOSIT_BOX_DEPOSIT_BOX_ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DEPOSIT_BOX_DEPOSITBOXID_GENERATOR")
     @Column(name = "deposit_box_id", updatable = false)
     private Long id;
 
-    @Column(name = "default_payment_type", unique = true)
-    private PaymentTypes defaultPaymentType;
-
-    @Column(name = "allowed_payment_types")
-    private Set<PaymentTypes> allowedPayments;
-
-    @Column(name="description_txt", nullable=false, length=500)
+    @Column(name = "description_txt", length = 500)
     private String description;
 
-    @Column(nullable=false, length=50)
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
 
-    //bi-directional many-to-one association to DepositBoxXExpense
-    @OneToMany(mappedBy = "depositBox", fetch = FetchType.LAZY)
-    private List<DepositBoxXExpense> expenses = new ArrayList<>();
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "deposit_box_type_cd", nullable = false, updatable = false)
+    private DepositBoxTypes type;
 
-    //bi-directional many-to-one association to DepositBoxXIncome
+    // bi-directional many-to-one association to DepositBoxXExpense
     @OneToMany(mappedBy = "depositBox", fetch = FetchType.LAZY)
-    private List<DepositBoxXIncome> incomes = new ArrayList<>();
+    private List<CashFlowOut> expenses = new ArrayList<>();
 
-    //bi-directional many-to-one association to Transition
+    // bi-directional many-to-one association to DepositBoxXIncome
+    @OneToMany(mappedBy = "depositBox", fetch = FetchType.LAZY)
+    private List<CashFlowIn> incomes = new ArrayList<>();
+
+    // bi-directional many-to-one association to Transition
     @OneToMany(mappedBy = "depositBox1", fetch = FetchType.LAZY)
     private List<Transition> fromTranistions = new ArrayList<>();
 
-    //bi-directional many-to-one association to Transition
+    // bi-directional many-to-one association to Transition
     @OneToMany(mappedBy = "depositBox2", fetch = FetchType.LAZY)
     private List<Transition> toTransitions = new ArrayList<>();
 
@@ -70,14 +68,6 @@ public class DepositBox implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public Integer getDepositBoxType() {
-        return defaultPaymentType;
-    }
-
-    public void setDepositBoxType(final Integer depositBoxTypeCd) {
-        defaultPaymentType = depositBoxTypeCd;
     }
 
     public String getDescription() {
@@ -96,44 +86,36 @@ public class DepositBox implements Serializable {
         this.name = name;
     }
 
-    public List<DepositBoxXExpense> getExpenses() {
+    public List<CashFlowOut> getExpenses() {
         return expenses;
     }
 
-    // public void setExpenses(final List<DepositBoxXExpense> expenses) {
-    // this.expenses = expenses;
-    // }
+    public CashFlowOut addExpense(final CashFlowOut expense) {
+        getExpenses().add(expense);
+        expense.setDepositBox(this);
 
-    public DepositBoxXExpense addExpens(final DepositBoxXExpense expens) {
-        getExpenses().add(expens);
-        expens.setDepositBox(this);
-
-        return expens;
+        return expense;
     }
 
-    public DepositBoxXExpense removeExpens(final DepositBoxXExpense expens) {
+    public CashFlowOut removeExpense(final CashFlowOut expens) {
         getExpenses().remove(expens);
         expens.setDepositBox(null);
 
         return expens;
     }
 
-    public List<DepositBoxXIncome> getIncomes() {
+    public List<CashFlowIn> getIncomes() {
         return incomes;
     }
 
-    // public void setIncomes(final List<DepositBoxXIncome> incomes) {
-    // this.incomes = incomes;
-    // }
-
-    public DepositBoxXIncome addIncome(final DepositBoxXIncome income) {
+    public CashFlowIn addIncome(final CashFlowIn income) {
         getIncomes().add(income);
         income.setDepositBox(this);
 
         return income;
     }
 
-    public DepositBoxXIncome removeIncome(final DepositBoxXIncome income) {
+    public CashFlowIn removeIncome(final CashFlowIn income) {
         getIncomes().remove(income);
         income.setDepositBox(null);
 
@@ -143,10 +125,6 @@ public class DepositBox implements Serializable {
     public List<Transition> getFromTranistions() {
         return fromTranistions;
     }
-
-    // public void setFromTranistions(final List<Transition> fromTranistions) {
-    // this.fromTranistions = fromTranistions;
-    // }
 
     public Transition addFromTranistion(final Transition fromTranistion) {
         getFromTranistions().add(fromTranistion);
@@ -166,10 +144,6 @@ public class DepositBox implements Serializable {
         return toTransitions;
     }
 
-    // public void setToTransitions(final List<Transition> toTransitions) {
-    // this.toTransitions = toTransitions;
-    // }
-
     public Transition addToTransition(final Transition toTransition) {
         getToTransitions().add(toTransition);
         toTransition.setTo(this);
@@ -184,6 +158,62 @@ public class DepositBox implements Serializable {
         return toTransition;
     }
 
+    /**
+     * @return the type
+     */
+    public DepositBoxTypes getType() {
+        return type;
+    }
+
+    /**
+     * @param type
+     *            the type to set
+     */
+    public void setType(final DepositBoxTypes type) {
+        this.type = type;
+    }
+
+    /**
+     * @param id
+     *            the id to set
+     */
+    protected void setId(final Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @param expenses
+     *            the expenses to set
+     */
+    protected void setExpenses(final List<CashFlowOut> expenses) {
+        this.expenses = expenses;
+    }
+
+    /**
+     * @param incomes
+     *            the incomes to set
+     */
+    protected void setIncomes(final List<CashFlowIn> incomes) {
+        this.incomes = incomes;
+    }
+
+    /**
+     * @param fromTranistions
+     *            the fromTranistions to set
+     */
+    protected void setFromTranistions(final List<Transition> fromTranistions) {
+        this.fromTranistions = fromTranistions;
+    }
+
+    /**
+     * @param toTransitions
+     *            the toTransitions to set
+     */
+    protected void setToTransitions(final List<Transition> toTransitions) {
+        this.toTransitions = toTransitions;
+    }
+
+
     /*
      * (non-Javadoc)
      *
@@ -191,9 +221,9 @@ public class DepositBox implements Serializable {
      */
     @Override
     public String toString() {
-        return "DepositBox [id=" + id + ", depositBoxType=" + defaultPaymentType + ", description=" + description
-                + ", name=" + name + ", expenses=" + expenses + ", incomes=" + incomes + ", fromTranistions="
-                + fromTranistions + ", toTransitions=" + toTransitions + "]";
+        return "DepositBox [id=" + id + ", description=" + description + ", name=" + name + ", expenses=" + expenses
+                + ", incomes=" + incomes + ", fromTranistions=" + fromTranistions + ", toTransitions=" + toTransitions
+                + "]";
     }
 
 }

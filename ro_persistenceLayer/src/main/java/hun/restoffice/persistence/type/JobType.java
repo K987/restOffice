@@ -51,14 +51,14 @@ public class JobType extends ParameterType implements Serializable {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         return "JobType [jobHourlyWageAmt=" + jobHourlyWageAmt + ", jobTipSharePct=" + jobTipSharePct + ", getId()="
                 + this.getId() + ", getDescription()=" + this.getDescription() + ", getName()=" + this.getName()
-                + ", getValidity()=" + this.getValidity() + "]";
+                + ", getEffectivity()=" + this.getEffectivity() + "]";
     }
 
 
