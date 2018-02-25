@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 
 import hu.rest.hal.jaxrs.ResourceRegistry;
 import hu.restoffice.rest.model.PartnerStub;
-import hu.restoffice.rest.service.PartnerService;
 
 /**
  * Entry class for rest services
