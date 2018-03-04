@@ -4,6 +4,14 @@ eclipse.classpath.downloadJavadoc = true
 
 dependencies {
  //compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.10.Final'
- compileOnly group: 'javax', name: 'javaee-api', version: '7.0'
+    compileOnly group: 'javax', name: 'javaee-api', version: '7.0'
+ 
+    testCompile group: 'com.github.database-rider', name: 'rider-core', version: '1.2.7'
+    testCompile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
+    testCompile group: 'org.hibernate', name: 'hibernate-core', version: '4.2.20.Final'
+    testCompile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.2.20.Final'
 
+//testCompile group: 'org.dbunit', name: 'dbunit', version: '2.5.4' 
+testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.8.0-beta1'
+//testCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.8.0-beta1'
 }
